@@ -1,23 +1,36 @@
 class UpdateBoard{
 
-  updateBoard(board){
+  updateCell(c, e){
 
-    if(this.isDead(cell) && //){
-      else if(||//){
-
+    if((this.isAlive(c) && (this.liveEnvironmentProportion(e) >= 4))
+    || this.isAlive(c) && (this.liveEnvironmentProportion(e) <= 2)){
+      this.kill(c)
       }
-    }
+      else if(!this.isAlive(c) && (this.liveEnvironmentProportion(e) == 3)){
+        this.birth(c)
+      }
   }
 
-  isDead(cell){
-    return cell == 0
+  liveEnvironmentProportion(e){
+    var result = [];
+    e.forEach(function(x){
+      if(this.isAlive(x)){
+        result.push(x)
+      }
+    });
+    return result.length
   }
 
-  grabEnvironment(cell, board){
-    var cX = cell[0];
-    var cY = cell[1];
-    var environment = [];
-    environment.push()
+  isAlive(cell){
+    return cell == 1
+  }
+
+  kill(cell){
+    cell = 0
+  }
+
+  birth(cell){
+    cell = 1
   }
 
 }
