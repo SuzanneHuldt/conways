@@ -1,7 +1,10 @@
 class UpdateBoard{
 
+  updateBoard(board){
+    // for x in board
+    this.updateCell(x, this.extractEnvironment(x, board))
+  }
   updateCell(c, e){
-
     if((this.isAlive(c) && (this.liveEnvironmentProportion(e) >= 4))
     || this.isAlive(c) && (this.liveEnvironmentProportion(e) <= 2)){
       this.kill(c)
@@ -9,6 +12,13 @@ class UpdateBoard{
       else if(!this.isAlive(c) && (this.liveEnvironmentProportion(e) == 3)){
         this.birth(c)
       }
+  }
+
+  extractEnvironment(cell, board){
+    // var environment = [];
+    // extract 8 neighbouring cells by coordinates
+
+    return environment;
   }
 
   liveEnvironmentProportion(e){
