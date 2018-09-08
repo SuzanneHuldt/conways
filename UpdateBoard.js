@@ -2,11 +2,13 @@
 
 class UpdateBoard{
   updateBoard(board){
-    var x = 0;
-    var y = 0;
-    board[y][x]
-    // for x in board
-    //this.updateCell(x, this.extractEnvironment(x, board))
+    for(var y = 0; y < board.length; y ++ 1){
+      for(var x = 0; x < board[0].length; x ++ 1){
+        var cell_address = [y,x];
+        var cell = board[y,x];
+        return this.updateCell(cell, this.extractEnvironment(cell_address, board));
+      }
+    }
   }
   updateCell(c, e){
     if((this.isAlive(c) && (this.liveEnvironmentProportion(e) >= 4))
@@ -19,7 +21,6 @@ class UpdateBoard{
   }
 
   extractEnvironment(cell_address, board){
-    console.log(board)
     var x = cell_address[1];
     var y = cell_address[0];
     var environment = [];
