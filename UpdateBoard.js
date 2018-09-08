@@ -1,22 +1,25 @@
 'use strict';
 
+
 class UpdateBoard{
   updateBoard(board){
-    for(var y = 0; y < board.length; y ++ 1){
-      for(var x = 0; x < board[0].length; x ++ 1){
+    var updatedBoard = board.slice[0];
+    for(var y = 0; y < board.length; y++){
+      for(var x = 0; x < board[0].length; x++){
         var cell_address = [y,x];
         var cell = board[y,x];
-        return this.updateCell(cell, this.extractEnvironment(cell_address, board));
+        return this.updateCell(cell, this.extractEnvironment(cell_address, board), cell_address, updatedBoard);
       }
     }
+    return updatedBoard;
   }
-  updateCell(c, e){
+  updateCell(c, e, cell_address, updatedBoard){
     if((this.isAlive(c) && (this.liveEnvironmentProportion(e) >= 4))
     || this.isAlive(c) && (this.liveEnvironmentProportion(e) <= 2)){
-      this.kill(c)
+      this.kill(cell_address, updatedBoard)
       }
       else if(!this.isAlive(c) && (this.liveEnvironmentProportion(e) == 3)){
-        this.birth(c)
+        this.birth(cell_address, updatedBoard)
       }
   }
 
@@ -49,12 +52,16 @@ class UpdateBoard{
     return cell == 1
   }
 
-  kill(cell){
-    cell = 0
+  kill(cell_address, updatedBoard){
+    var x = cell_address[1];
+    var y = cell_address[0];
+    updatedBoard[y,x] = 0
   }
 
-  birth(cell){
-    cell = 1
+  birth(cell_address, updatedBoard){
+    var x = cell_address[1];
+    var y = cell_address[0];
+    updatedBoard[y,x] = 1
   }
 
 }
