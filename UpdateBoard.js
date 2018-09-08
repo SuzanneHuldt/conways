@@ -1,8 +1,12 @@
-class UpdateBoard{
+'use strict';
 
+class UpdateBoard{
   updateBoard(board){
+    var x = 0;
+    var y = 0;
+    board[y][x]
     // for x in board
-    this.updateCell(x, this.extractEnvironment(x, board))
+    //this.updateCell(x, this.extractEnvironment(x, board))
   }
   updateCell(c, e){
     if((this.isAlive(c) && (this.liveEnvironmentProportion(e) >= 4))
@@ -14,10 +18,19 @@ class UpdateBoard{
       }
   }
 
-  extractEnvironment(cell, board){
-    // var environment = [];
-    // extract 8 neighbouring cells by coordinates
-
+  extractEnvironment(cell_address, board){
+    console.log(board)
+    var x = cell_address[1];
+    var y = cell_address[0];
+    var environment = [];
+    environment.push(board[(x+1)][y+1])
+    environment.push(board[(x+1)][y-1])
+    environment.push(board[(x-1)][y+1])
+    environment.push(board[(x-1)][y-1])
+    environment.push(board[(x)][y+1])
+    environment.push(board[(x)][y-1])
+    environment.push(board[(x+1)][y])
+    environment.push(board[(x-1)][y])
     return environment;
   }
 
@@ -44,3 +57,4 @@ class UpdateBoard{
   }
 
 }
+module.exports = UpdateBoard;
